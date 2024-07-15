@@ -9,14 +9,9 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    const parsedUrl = parse(req.url!, true);
-    const {pathname}=parsedUrl;
-    if(pathname==="/health"){
-      res.statusCode = 200
-      res.end('Healthy')
-    }else{
-      handle(req, res, parsedUrl);
-    }
+    res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(req.url);
+  res.end();
   }).listen(port);
 
   console.log(
